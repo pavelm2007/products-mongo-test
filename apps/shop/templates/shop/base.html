@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load shop_category %}
+{% block extra_js %}
+    {{ block.super }}
+    <script>
+        $(document).ready(function () {
+            $('label.tree-toggler').click(function () {
+                $(this).parent().children('ul.tree').toggle(300);
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block page_title %}
+    {% if current_category %}
+        {{ current_category.name }}
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 sidebar">
+            {% block sidebar %}
+                {% if category_list %}
+                    <h3>Category</h3>
+
+                    <ul class="nav nav-tabs nav-stacked">
+                        {% for category in category_list %}
+                            {% category_tree category %}
+                        {% endfor %}
+                    </ul>
+                    <ul class="nav nav-tabs nav-stacked">
+                        {% for category in category_list %}
+                            <li>
+                                <a href='{{ category.get_absolute_url }}'>{{ category.name }}</a>
+                            </li>
+
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endblock %}
+        </div>
+        <div class="col-xs-9 col-sm-9 col-md-9">
+            {% block block_content %}
+
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

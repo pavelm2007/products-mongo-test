@@ -1,0 +1,34 @@
+{% extends 'shop/base.html' %}
+
+{% block block_content %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            {{ current_category.name }}
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <table class="table">
+                <thead>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Position</td>
+                <td>Actions</td>
+                </thead>
+                <tbody>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.id }}</td>
+                        <td>{{ object.name }}</td>
+                        <td>{{ object.position }}</td>
+                        <td>
+                            <a href="{{ object.get_update_url }}" class="btn btn-info btn-xs"
+                               role="button">Update</a>
+                            <a href="{{ object.get_delete_url }}" class="btn btn-default btn-xs"
+                               role="button">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

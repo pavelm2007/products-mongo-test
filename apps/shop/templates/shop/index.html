@@ -1,0 +1,42 @@
+{% extends 'shop/base.html' %}
+
+{% block block_content %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            {{ current_category.name }}
+        </div>
+        {% for object in object_list %}
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/500x300" alt="">
+
+                    <div class="caption">
+                        <h4>{{ object.name }}</h4>
+
+                        <p>{{ object.intro|truncatechars:30 }}</p>
+
+                        <p>
+                        <dl>
+                            {% for option, value in object.get_option_list.items %}
+                                <dt>{{ option.name }}</dt>
+                                <dd>{{ value }}</dd>
+                            {% endfor %}
+                        </dl>
+                        </p>
+
+                        <p>
+                            <a href="{{ object.get_absolute_url }}" class="btn btn-info btn-xs" role="button">Read</a>
+                            <a href="{{ object.get_update_url }}" class="btn btn-default btn-xs"
+                               role="button">Update</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+
+    </div>
+{% endblock %}
+
+

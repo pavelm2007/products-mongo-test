@@ -1,0 +1,14 @@
+{% load shop_category %}
+{% if category %}
+    <li><a href='{{ category.get_absolute_url }}'>{{ category.name }}</a>
+        {% if children %}
+            <ul>
+                {% for child in children %}
+                    {% if child %}
+                        <li>{% category_tree child %}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% endif %}

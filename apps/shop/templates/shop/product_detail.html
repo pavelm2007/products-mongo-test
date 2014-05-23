@@ -1,0 +1,30 @@
+{% extends 'shop/base.html' %}
+
+{% block block_content %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <h4>{{ object.name }}</h4>
+
+            <p>{{ object.intro }}</p>
+
+            <p>{{ object.description }}</p>
+
+            <p>{{ object.price }}</p>
+
+            <p>{{ object.category.name }}</p>
+            <dl>
+                {% for option, value in object.get_option_list.items %}
+                    <dt>{{ option.name }}</dt>
+                    <dd>{{ value }}</dd>
+                {% endfor %}
+            </dl>
+
+            <div class="btn-group">
+                <a href="{{ object.get_absolute_url }}" class="btn btn-primary">Add to basket</a>
+                <a href="{{ object.get_update_url }}" class="btn btn-default" role="button">Update</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
